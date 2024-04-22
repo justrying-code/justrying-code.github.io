@@ -1353,7 +1353,7 @@ Running the remote exploit, since ASLR was enabled on the server, we have to bru
 
 Now, being the user `r4j` didn't really gave much away with basic enumeration and as I knew that the fact of the root part being the kernel, I went in and checked for the `/dev/` to look for any suspicious driver, in this case the only thing that stood out more than the other was, `ralloc`. 
 
-> Attachment: The files for root exploitation can be found [here](https://github.com/D4mianWayne/PwnLand/tree/master/CTFs/RopeTwo_HackTheBox/Root).
+Attachment: The files for root exploitation can be found [here](https://github.com/D4mianWayne/PwnLand/tree/master/CTFs/RopeTwo_HackTheBox/Root).
 
 One way I found about the `ralloc` custom LKM was with the help of `dmesg`, which showed the follwing message:-
 
