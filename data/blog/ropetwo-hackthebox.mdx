@@ -82,6 +82,8 @@ d4mian@pwnbox:~/v8$ ninja -C ./out.gn/x64.debug
 This took some time, approximately 3 hours on my VM which had 3GB of RAM and 1 core, though I made both the debug version and release version, but the release version was more helpful because before doing this v8 exploitation challenge, I did the DownUnderCTF's "Is it Pwn or Web?" challenge which was close to same to this one, that being said, let's get started.
 
 
+Attachment: The `d8` binary and the exploits can be found here: https://github.com/D4mianWayne/PwnLand/tree/master/CTFs/RopeTwo_HackTheBox/Foothold
+
 
 The only obstacle one would really stumble upon during this challenge is the use of the Pointer Compression, this made the address representation in 32 bit, which resulted in the leak being hard to make something of, since the isolate root, the upper 32 bit value of an address which is used to access the data around the V8 heap turned out to be an issue. But going through this [blog](), this mentioned that we do not need to know about the isolate root address, if we could manage to massage the vulnerability to get `fakeobj` and the `addrof` primitive, then we can get through the pointer compression which would result in not being a problem.
 
@@ -1620,7 +1622,7 @@ Now, considering that, if we see for the memory content, the `ptm_unix98_ops` ob
 
 Now, since we have a leak, this will be useful in retrieving the base address to calculate the address of the function and gadget we will need, for now, since the structure as defined, if we can overwrite the `*ops` with the help of the fake `tty_operations` array created from the userland, we can have the RIP control.
 
-> The POC for `tty_struct` and RIP control can be understood from here: <https://www.lazenca.net/pages/viewpage.action?pageId=29327365#id-07.Use-After-Free(UAF)(feat.tty_struct)-PoCcode>
+The POC for `tty_struct` and RIP control can be understood from here: https://www.lazenca.net/pages/viewpage.action?pageId=29327365#id-07.Use-After-Free(UAF)(feat.tty_struct)-PoCcode
 
 Now compiling the exploit:-
 
